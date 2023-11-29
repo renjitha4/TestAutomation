@@ -15,17 +15,31 @@
     <PackageReference Include="Selenium.Support" Version="4.15.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.15.0" />
     <PackageReference Include="SpecFlow" Version="4.0.31-beta" />
+    <PackageReference Include="SpecFlow.NUnit" Version="4.0.31-beta" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Drivers\" />
     <Folder Include="Features\" />
-    <Folder Include="PageObject\" />
-    <Folder Include="StepDefinition\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PageObject\NewCollegePageObject.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="StepDefinition\SampleTestsSteps.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Nunit Tests\SampleTest.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Drivers\chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Features\SampleTests.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

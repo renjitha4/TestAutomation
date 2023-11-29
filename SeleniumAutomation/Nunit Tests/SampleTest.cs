@@ -1,13 +1,14 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SeleniumAutomation
 {
     public class Tests
     {
-        public IWebDriver? driver = null;
+        public IWebDriver driver;
 
         [SetUp]
         public void Setup()
@@ -20,8 +21,7 @@ namespace SeleniumAutomation
         [Test]
         public void NewCollegeEnrollment()
         {
-            driver.Navigate().GoToUrl("https://nsw.newcollege.com.au/");
-            
+            driver.Navigate().GoToUrl("https://nsw.newcollege.com.au/");            
             IWebElement tabEnrollment = driver.FindElement(By.Id("menu-item-2876"));
             Assert.IsTrue(tabEnrollment.Displayed);
 
@@ -30,7 +30,6 @@ namespace SeleniumAutomation
             Assert.IsTrue(btnEnrollment.Displayed);
 
             btnEnrollment.Click();
-
             IWebElement lblEmailError = driver.FindElement(By.XPath("//div[@class='mb-5 text-danger']"));
             Assert.IsTrue(lblEmailError.Text.Contains("* The email verification step is essential for confirming your booking."));
 
@@ -60,16 +59,41 @@ namespace SeleniumAutomation
             IWebElement addToCartButton = driver.FindElement(By.Id("add-to-cart-sauce-labs-backpack"));
             addToCartButton.Click();
 
+            IWebElement shoppingCartLink = driver.FindElement(By.XPath("//a[@class='shopping_cart_link']"));
+            shoppingCartLink.Click();
+
+            IWebElement btnCheckout = driver.FindElement(By.Id("checkout"));
+            btnCheckout.Click();
+
+           
+
+            IWebElement txtFirstname = driver.FindElement(By.Id("first-name"));
+            txtFirstname.SendKeys("abc");
+
+            IWebElement txtLastname = driver.FindElement(By.Id("last-name"));
+            txtLastname.SendKeys("xyz");
+
+            IWebElement txtPostcode = driver.FindElement(By.Id("postal-code"));
+            txtPostcode.SendKeys("1234");
+
+            IWebElement btnContinue = driver.FindElement(By.Id("continue"));
+            btnContinue.Click();
+
+            IWebElement btnFinish = driver.FindElement(By.Id("finish"));
+            btnFinish.Click();
+
+
+
         }
 
 
 
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    driver.Close();
-        //    driver.Quit();
-        //    driver.Dispose();
-        //}
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Close();
+            driver.Quit();
+            driver.Dispose();
+        }
     }
 }
